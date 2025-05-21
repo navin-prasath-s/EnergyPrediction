@@ -8,7 +8,6 @@ from sklearn.metrics import (
 )
 
 def compute_forecast_metrics(y_true, y_pred):
-
     y_true = np.array(y_true)
     y_pred = np.array(y_pred)
 
@@ -18,6 +17,7 @@ def compute_forecast_metrics(y_true, y_pred):
     rmse = np.sqrt(mse)
     mape = mean_absolute_percentage_error(y_true, y_pred) * 100
     smape = 100 * np.mean( 2 * np.abs(y_pred - y_true) / (np.abs(y_true) + np.abs(y_pred) + 1e-8))
+
 
     return {
         'MAE': float(mae),
@@ -47,17 +47,18 @@ def compute_horizon_degradation_metrics(actual_df, forecast_df):
         # y_true = actual_df['load'].values
         y_true = actual_df['load'].values[:len(y_pred)]
 
-        if len(y_true) != len(y_pred) or len(y_true) == 0:
-            continue
+        # if len(y_true) != len(y_pred) or len(y_true) == 0:
+        #     continue
+
 
         metrics = compute_forecast_metrics(y_true, y_pred)
-
         horizon_metrics['horizon'].append(h)
         horizon_metrics['MAE'].append(metrics['MAE'])
         horizon_metrics['MSE'].append(metrics['MSE'])
         horizon_metrics['RMSE'].append(metrics['RMSE'])
         horizon_metrics['MAPE (%)'].append(metrics['MAPE (%)'])
         horizon_metrics['SMAPE (%)'].append(metrics['SMAPE (%)'])
+
 
     return pd.DataFrame(horizon_metrics)
 
