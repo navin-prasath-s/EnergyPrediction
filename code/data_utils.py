@@ -40,6 +40,8 @@ def clean_actual_data(df, area='PJM RTO'):
 
     df = df.sort_values(by=['timestamp']).reset_index(drop=True)
 
+
+
     # Format to unified readable format
     # df['timestamp'] = df['timestamp'].dt.strftime('%m/%d/%Y %I:%M:%S %p')
 
@@ -79,6 +81,8 @@ def clean_forecast_data(df, forecast_area='RTO_COMBINED'):
 
     latest_issued_at = df['issued_at'].max()
     df = df[df['issued_at'] < latest_issued_at]
+
+
 
     # df['issued_at_str'] = df['issued_at'].dt.strftime('%m/%d/%Y %I:%M:%S %p')
     # df['target_time_str'] = df['target_time'].dt.strftime('%m/%d/%Y %I:%M:%S %p')

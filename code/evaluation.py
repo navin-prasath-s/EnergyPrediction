@@ -44,12 +44,7 @@ def compute_horizon_degradation_metrics(actual_df, forecast_df):
         forecast_horizon = forecast_df[forecast_df['horizon'] == h]
 
         y_pred = forecast_horizon['forecast_load'].values
-        # y_true = actual_df['load'].values
         y_true = actual_df['load'].values[:len(y_pred)]
-
-        # if len(y_true) != len(y_pred) or len(y_true) == 0:
-        #     continue
-
 
         metrics = compute_forecast_metrics(y_true, y_pred)
         horizon_metrics['horizon'].append(h)
