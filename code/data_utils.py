@@ -39,12 +39,6 @@ def clean_actual_data(df, area='PJM RTO'):
         print(f"Warning: {failed} timestamps failed to parse and will be set as NaT")
 
     df = df.sort_values(by=['timestamp']).reset_index(drop=True)
-
-
-
-    # Format to unified readable format
-    # df['timestamp'] = df['timestamp'].dt.strftime('%m/%d/%Y %I:%M:%S %p')
-
     return df
 
 
